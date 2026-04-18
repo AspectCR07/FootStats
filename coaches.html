@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaches - FootStats</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html"><i class="fas fa-futbol"></i> FootStats</a></h1>
+            </div>
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="teams.html">Teams</a></li>
+                    <li><a href="players.html">Players</a></li>
+                    <li><a href="coaches.html" class="active">Coaches</a></li>
+                    <li><a href="leagues.html">Leagues</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="signin.html" class="btn btn-outline">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Coaches</h1>
+            <p>Explore top football managers and their achievements</p>
+        </div>
+    </section>
+
+    <section class="filters">
+        <div class="container">
+            <div class="filter-container">
+                <div class="search-box">
+                    <input type="text" id="coach-search" placeholder="Search coaches...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <label for="team-filter">Team</label>
+                        <select id="team-filter">
+                            <option value="">All Teams</option>
+                            <option value="manchester-city">Manchester City</option>
+                            <option value="real-madrid">Real Madrid</option>
+                            <option value="bayern-munich">Bayern Munich</option>
+                            <option value="liverpool">Liverpool</option>
+                            <option value="psg">Paris Saint-Germain</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="nationality-filter">Nationality</label>
+                        <select id="nationality-filter">
+                            <option value="">All Nationalities</option>
+                            <option value="spain">Spain</option>
+                            <option value="germany">Germany</option>
+                            <option value="italy">Italy</option>
+                            <option value="england">England</option>
+                            <option value="france">France</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sort-by">Sort By</label>
+                        <select id="sort-by">
+                            <option value="name">Name</option>
+                            <option value="wins">Wins</option>
+                            <option value="trophies">Trophies</option>
+                            <option value="win-rate">Win Rate</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="coaches-grid">
+        <div class="container">
+            <div class="grid-container">
+                <div class="coach-card">
+                    <div class="coach-image">
+                        <img src="images/coach1.jpg" alt="Pep Guardiola">
+                    </div>
+                    <div class="coach-info">
+                        <h3>Pep Guardiola</h3>
+                        <p class="coach-team">Manchester City</p>
+                        <div class="coach-details">
+                            <span><i class="fas fa-flag"></i> Spain</span>
+                            <span><i class="fas fa-trophy"></i> 37 Trophies</span>
+                        </div>
+                        <div class="coach-stats">
+                            <div class="stat">
+                                <span class="stat-value">782</span>
+                                <span class="stat-label">Wins</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">173</span>
+                                <span class="stat-label">Draws</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">128</span>
+                                <span class="stat-label">Losses</span>
+                            </div>
+                        </div>
+                        <a href="coach-details.html?id=1" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="coach-card">
+                    <div class="coach-image">
+                        <img src="images/coach2.jpg" alt="Carlo Ancelotti">
+                    </div>
+                    <div class="coach-info">
+                        <h3>Carlo Ancelotti</h3>
+                        <p class="coach-team">Real Madrid</p>
+                        <div class="coach-details">
+                            <span><i class="fas fa-flag"></i> Italy</span>
+                            <span><i class="fas fa-trophy"></i> 26 Trophies</span>
+                        </div>
+                        <div class="coach-stats">
+                            <div class="stat">
+                                <span class="stat-value">693</span>
+                                <span class="stat-label">Wins</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">297</span>
+                                <span class="stat-label">Draws</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">264</span>
+                                <span class="stat-label">Losses</span>
+                            </div>
+                        </div>
+                        <a href="coach-details.html?id=2" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="coach-card">
+                    <div class="coach-image">
+                        <img src="images/coach3.jpg" alt="Jürgen Klopp">
+                    </div>
+                    <div class="coach-info">
+                        <h3>Jürgen Klopp</h3>
+                        <p class="coach-team">Liverpool</p>
+                        <div class="coach-details">
+                            <span><i class="fas fa-flag"></i> Germany</span>
+                            <span><i class="fas fa-trophy"></i> 11 Trophies</span>
+                        </div>
+                        <div class="coach-stats">
+                            <div class="stat">
+                                <span class="stat-value">548</span>
+                                <span class="stat-label">Wins</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">196</span>
+                                <span class="stat-label">Draws</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">203</span>
+                                <span class="stat-label">Losses</span>
+                            </div>
+                        </div>
+                        <a href="coach-details.html?id=3" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="coach-card">
+                    <div class="coach-image">
+                        <img src="images/coach4.jpg" alt="Thomas Tuchel">
+                    </div>
+                    <div class="coach-info">
+                        <h3>Thomas Tuchel</h3>
+                        <p class="coach-team">Bayern Munich</p>
+                        <div class="coach-details">
+                            <span><i class="fas fa-flag"></i> Germany</span>
+                            <span><i class="fas fa-trophy"></i> 12 Trophies</span>
+                        </div>
+                        <div class="coach-stats">
+                            <div class="stat">
+                                <span class="stat-value">387</span>
+                                <span class="stat-label">Wins</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">122</span>
+                                <span class="stat-label">Draws</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">138</span>
+                                <span class="stat-label">Losses</span>
+                            </div>
+                        </div>
+                        <a href="coach-details.html?id=4" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="coach-card">
+                    <div class="coach-image">
+                        <img src="images/coach5.jpg" alt="Xavi Hernández">
+                    </div>
+                    <div class="coach-info">
+                        <h3>Xavi Hernández</h3>
+                        <p class="coach-team">Barcelona</p>
+                        <div class="coach-details">
+                            <span><i class="fas fa-flag"></i> Spain</span>
+                            <span><i class="fas fa-trophy"></i> 2 Trophies</span>
+                        </div>
+                        <div class="coach-stats">
+                            <div class="stat">
+                                <span class="stat-value">81</span>
+                                <span class="stat-label">Wins</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">19</span>
+                                <span class="stat-label">Draws</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">25</span>
+                                <span class="stat-label">Losses</span>
+                            </div>
+                        </div>
+                        <a href="coach-details.html?id=5" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="coach-card">
+                    <div class="coach-image">
+                        <img src="images/coach6.jpg" alt="Luis Enrique">
+                    </div>
+                    <div class="coach-info">
+                        <h3>Luis Enrique</h3>
+                        <p class="coach-team">Paris Saint-Germain</p>
+                        <div class="coach-details">
+                            <span><i class="fas fa-flag"></i> Spain</span>
+                            <span><i class="fas fa-trophy"></i> 9 Trophies</span>
+                        </div>
+                        <div class="coach-stats">
+                            <div class="stat">
+                                <span class="stat-value">259</span>
+                                <span class="stat-label">Wins</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">69</span>
+                                <span class="stat-label">Draws</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">65</span>
+                                <span class="stat-label">Losses</span>
+                            </div>
+                        </div>
+                        <a href="coach-details.html?id=6" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <button class="pagination-btn prev disabled"><i class="fas fa-chevron-left"></i></button>
+                <div class="page-numbers">
+                    <button class="page-number active">1</button>
+                    <button class="page-number">2</button>
+                    <button class="page-number">3</button>
+                    <button class="page-number">4</button>
+                </div>
+                <button class="pagination-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><i class="fas fa-futbol"></i> FootStats</h2>
+                    <p>Your ultimate football statistics hub</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Explore</h3>
+                        <ul>
+                            <li><a href="teams.html">Teams</a></li>
+                            <li><a href="players.html">Players</a></li>
+                            <li><a href="coaches.html">Coaches</a></li>
+                            <li><a href="leagues.html">Leagues</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Account</h3>
+                        <ul>
+                            <li><a href="signin.html">Sign In</a></li>
+                            <li><a href="signup.html">Sign Up</a></li>
+                            <li><a href="#">My Profile</a></li>
+                            <li><a href="#">Settings</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 FootStats. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/coaches.js"></script>
+</body>
+</html>

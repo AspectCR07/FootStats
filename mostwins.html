@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Most Wins by Team</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1200px;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .chart {
+            width: 48%;
+            max-width: 500px;
+            min-width: 300px;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+
+        .return-btn {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .return-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        @media (max-width: 768px) {
+            .chart {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Most Wins by Team</h1>
+
+    <div class="chart-container">
+        <div class="chart">
+            <h2>Wins Distribution (Pie Chart)</h2>
+            <canvas id="winsPieChart"></canvas>
+        </div>
+        <div class="chart">
+            <h2>Wins per Team (Bar Chart)</h2>
+            <canvas id="winsBarChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Return button to go back to logout page -->
+    <button class="return-btn" onclick="window.location.href='logout.html';">Return to Logout</button>
+
+    <script>
+        // Sample data (replace with your actual data fetching logic)
+        const teamData = [
+            { team_name: "Manchester United", wins: 25 },
+            { team_name: "Chelsea", wins: 22 },
+            { team_name: "Liverpool", wins: 30 },
+            { team_name: "Manchester City", wins: 35 },
+            { team_name: "Arsenal", wins: 18 },
+            { team_name: "Tottenham Hotspur", wins: 21 },
+            { team_name: "Barcelona", wins: 32 },
+            { team_name: "Real Madrid", wins: 38 },
+            { team_name: "Bayern Munich", wins: 28 },
+            { team_name: "Juventus", wins: 27 }
+        ];
+
+        // Prepare data for Pie Chart
+        const pieChartLabels = teamData.map(team => team.team_name);
+        const pieChartData = teamData.map(team => team.wins);
+
+        const pieCtx = document.getElementById('winsPieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: pieChartLabels,
+                datasets: [{
+                    data: pieChartData,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(199, 21, 133, 0.7)',
+                        'rgba(0, 128, 0, 0.7)',
+                        'rgba(255, 140, 0, 0.7)',
+                        'rgba(0, 0, 255, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Distribution of Wins by Teams'
+                    }
+                }
+            }
+        });
+
+        // Prepare data for Bar Chart
+        const barChartLabels = teamData.map(team => team.team_name);
+        const barChartData = teamData.map(team => team.wins);
+
+        const barCtx = document.getElementById('winsBarChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: barChartLabels,
+                datasets: [{
+                    label: 'Wins',
+                    data: barChartData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Wins'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Team Name'
+                        },
+                        ticks: {
+                            autoSkip: false, // Prevent labels from overlapping
+                            maxRotation: 90 // Rotate labels for better readability
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Number of Wins by Each Team'
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>League Standings</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .chart-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 30px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .chart {
+      width: 100%;
+      max-width: 500px;
+      height: 400px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .return-button {
+      margin-top: 40px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>League Standings</h1>
+
+  <div class="chart-container">
+    <div class="chart">
+      <h2>Points by Team (Bar Chart)</h2>
+      <canvas id="leagueBarChart"></canvas>
+    </div>
+    <div class="chart">
+      <h2>Points Distribution (Pie Chart)</h2>
+      <canvas id="leaguePieChart"></canvas>
+    </div>
+  </div>
+
+  <div class="return-button">
+    <button onclick="window.location.href='logout.html'">Return</button>
+  </div>
+
+  <script>
+    // Sample league data (replace with real SQL output if needed)
+    const leagueData = [
+      { name: "Manchester City", points: 90 },
+      { name: "Arsenal", points: 87 },
+      { name: "Liverpool", points: 82 },
+      { name: "Tottenham", points: 75 },
+      { name: "Chelsea", points: 68 }
+    ];
+
+    const teamLabels = leagueData.map(team => team.name);
+    const teamPoints = leagueData.map(team => team.points);
+
+    // Bar Chart
+    const barCtx = document.getElementById('leagueBarChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: teamLabels,
+        datasets: [{
+          label: 'Points',
+          data: teamPoints,
+          backgroundColor: 'rgba(54, 162, 235, 0.7)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Points'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Team'
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Points Earned by Each Team'
+          },
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+
+    // Pie Chart
+    const pieCtx = document.getElementById('leaguePieChart').getContext('2d');
+    new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: teamLabels,
+        datasets: [{
+          data: teamPoints,
+          backgroundColor: [
+            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
+          ]
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Distribution of Points Among Teams'
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

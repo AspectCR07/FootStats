@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Player Assists</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .chart-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 30px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .chart {
+      width: 100%;
+      max-width: 500px;
+      height: 400px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .return-button {
+      margin-top: 40px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Top Assisting Players</h1>
+
+  <div class="chart-container">
+    <div class="chart">
+      <h2>Assists per Player (Bar Chart)</h2>
+      <canvas id="assistsBarChart"></canvas>
+    </div>
+    <div class="chart">
+      <h2>Assists Distribution (Pie Chart)</h2>
+      <canvas id="assistsPieChart"></canvas>
+    </div>
+  </div>
+
+  <div class="return-button">
+    <button onclick="window.location.href='logout.html'">Return</button>
+  </div>
+
+  <script>
+    // Sample data - replace with actual DB query result if needed
+    const assistData = [
+      { name: "Kevin De Bruyne", assists: 20 },
+      { name: "Lionel Messi", assists: 18 },
+      { name: "Bruno Fernandes", assists: 16 },
+      { name: "Joshua Kimmich", assists: 15 },
+      { name: "Trent Alexander-Arnold", assists: 14 },
+      { name: "Ousmane Dembélé", assists: 13 },
+      { name: "Thomas Müller", assists: 12 },
+      { name: "Jack Grealish", assists: 11 },
+      { name: "Rodrigo De Paul", assists: 10 },
+      { name: "Christian Pulisic", assists: 9 }
+    ];
+
+    const labels = assistData.map(player => player.name);
+    const data = assistData.map(player => player.assists);
+
+    // Bar Chart
+    const barCtx = document.getElementById('assistsBarChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Assists',
+          data: data,
+          backgroundColor: 'rgba(255, 159, 64, 0.7)',
+          borderColor: 'rgba(255, 159, 64, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Number of Assists'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Player'
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Assists by Player'
+          },
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+
+    // Pie Chart
+    const pieCtx = document.getElementById('assistsPieChart').getContext('2d');
+    new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: [
+            '#FF6384', '#36A2EB', '#FFCE56',
+            '#4BC0C0', '#9966FF', '#FF9F40',
+            '#C9CBCF', '#9C27B0', '#00BCD4', '#8BC34A'
+          ]
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Distribution of Player Assists'
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

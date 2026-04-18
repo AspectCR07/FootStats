@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Details - FootStats</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Player Details Specific Styles */
+        .player-profile {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .player-image {
+            flex: 0 0 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .player-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .player-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .player-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .player-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .player-team {
+            font-size: 1.2rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .player-team img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        
+        .player-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .meta-item {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .meta-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+        
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .stats-container {
+            margin-top: 3rem;
+        }
+        
+        .stats-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stats-tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .stats-tab.active {
+            border-bottom-color: #0056b3;
+            color: #0056b3;
+        }
+        
+        .stats-section {
+            display: none;
+        }
+        
+        .stats-section:first-of-type {
+            display: block;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .stat-card {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0056b3;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .career-timeline {
+            margin-top: 3rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #ddd;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            cursor: pointer;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #0056b3;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px #0056b3;
+        }
+        
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-club {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .timeline-period {
+            color: #666;
+        }
+        
+        .timeline-details {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+        }
+        
+        .timeline-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .player-profile {
+                flex-direction: column;
+            }
+            
+            .player-image {
+                flex: 0 0 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            
+            .stats-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html"><i class="fas fa-futbol"></i> FootStats</a></h1>
+            </div>
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="teams.html">Teams</a></li>
+                    <li><a href="players.html" class="active">Players</a></li>
+                    <li><a href="coaches.html">Coaches</a></li>
+                    <li><a href="leagues.html">Leagues</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="signin.html" class="btn btn-outline">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Player Details</h1>
+            <p>Comprehensive statistics and information</p>
+        </div>
+    </section>
+
+    <section class="player-details">
+        <div class="container">
+            <div class="player-profile">
+                <div class="player-image">
+                    <img src="images/player1.jpg" alt="Player Name">
+                </div>
+                <div class="player-info">
+                    <div class="player-header">
+                        <h1>Lionel Messi</h1>
+                        <div class="player-team">
+                            <img src="images/team1.jpg" alt="Team Logo">
+                            <span>Inter Miami CF</span>
+                        </div>
+                    </div>
+                    
+                    <div class="player-meta">
+                        <div class="meta-item">
+                            <div class="meta-label">Position</div>
+                            <div class="meta-value">Forward</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Age</div>
+                            <div class="meta-value">36</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Height</div>
+                            <div class="meta-value">170 cm</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Nationality</div>
+                            <div class="meta-value"><i class="fas fa-flag"></i> Argentina</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Preferred Foot</div>
+                            <div class="meta-value">Left</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Jersey Number</div>
+                            <div class="meta-value">#10</div>
+                        </div>
+                    </div>
+                    
+                    <p class="player-bio">
+                        Widely regarded as one of the greatest players of all time, Lionel Messi has won a record seven Ballon d'Or awards and a record six European Golden Shoes. Until leaving the club in 2021, he had spent his entire professional career with Barcelona, where he won a club-record 35 trophies, including ten La Liga titles, seven Copa del Rey titles and four UEFA Champions Leagues.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <h2>Player Statistics</h2>
+                
+                <div class="stats-tabs">
+                    <div class="stats-tab active" data-target="season-stats">Current Season</div>
+                    <div class="stats-tab" data-target="career-stats">Career</div>
+                    <div class="stats-tab" data-target="international-stats">International</div>
+                </div>
+                
+                <div id="season-stats" class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">11</div>
+                            <div class="stat-label">Goals</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">14</div>
+                            <div class="stat-label">Assists</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">25</div>
+                            <div class="stat-label">Appearances</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">2,150</div>
+                            <div class="stat-label">Minutes Played</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Yellow Cards</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Red Cards</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">89%</div>
+                            <div class="stat-label">Pass Accuracy</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">42</div>
+                            <div class="stat-label">Chances Created</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="career-stats" class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">704</div>
+                            <div class="stat-label">Goals</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">338</div>
+                            <div class="stat-label">Assists</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">853</div>
+                            <div class="stat-label">Appearances</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">42</div>
+                            <div class="stat-label">Trophies</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">7</div>
+                            <div class="stat-label">Ballon d'Or</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">6</div>
+                            <div class="stat-label">Golden Boots</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">91</div>
+                            <div class="stat-label">Goals in a Year</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">50</div>
+                            <div class="stat-label">Goals in a Season</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="international-stats" class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">102</div>
+                            <div class="stat-label">Goals</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">56</div>
+                            <div class="stat-label">Assists</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">175</div>
+                            <div class="stat-label">Appearances</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">1</div>
+                            <div class="stat-label">World Cup</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">1</div>
+                            <div class="stat-label">Copa America</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">1</div>
+                            <div class="stat-label">Finalissima</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">7</div>
+                            <div class="stat-label">Golden Ball</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">2</div>
+                            <div class="stat-label">Golden Boot</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="career-timeline">
+                <h2>Career History</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-club">Inter Miami CF</div>
+                            <div class="timeline-period">2023 - Present</div>
+                        </div>
+                        <div class="timeline-details">
+                            <p>Joined Major League Soccer club Inter Miami CF in July 2023 after leaving Paris Saint-Germain.</p>
+                            <div class="timeline-stats">
+                                <div class="stat-card">
+                                    <div class="stat-value">11</div>
+                                    <div class="stat-label">Goals</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">14</div>
+                                    <div class="stat-label">Assists</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">1</div>
+                                    <div class="stat-label">Trophies</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-club">Paris Saint-Germain</div>
+                            <div class="timeline-period">2021 - 2023</div>
+                        </div>
+                        <div class="timeline-details">
+                            <p>Joined Paris Saint-Germain in August 2021 after leaving Barcelona due to financial constraints at the Catalan club.</p>
+                            <div class="timeline-stats">
+                                <div class="stat-card">
+                                    <div class="stat-value">32</div>
+                                    <div class="stat-label">Goals</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">35</div>
+                                    <div class="stat-label">Assists</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">3</div>
+                                    <div class="stat-label">Trophies</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-club">FC Barcelona</div>
+                            <div class="timeline-period">2004 - 2021</div>
+                        </div>
+                        <div class="timeline-details">
+                            <p>Spent his entire professional career with Barcelona until 2021, becoming the club's all-time top scorer and appearance maker.</p>
+                            <div class="timeline-stats">
+                                <div class="stat-card">
+                                    <div class="stat-value">672</div>
+                                    <div class="stat-label">Goals</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">303</div>
+                                    <div class="stat-label">Assists</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">35</div>
+                                    <div class="stat-label">Trophies</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-club">FC Barcelona Youth</div>
+                            <div class="timeline-period">2000 - 2004</div>
+                        </div>
+                        <div class="timeline-details">
+                            <p>Joined Barcelona's youth academy, La Masia, at the age of 13 after moving from Argentina.</p>
+                            <div class="timeline-stats">
+                                <div class="stat-card">
+                                    <div class="stat-value">36</div>
+                                    <div class="stat-label">Goals</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">14</div>
+                                    <div class="stat-label">Assists</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">2</div>
+                                    <div class="stat-label">Youth Titles</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><i class="fas fa-futbol"></i> FootStats</h2>
+                    <p>Your ultimate football statistics hub</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Explore</h3>
+                        <ul>
+                            <li><a href="teams.html">Teams</a></li>
+                            <li><a href="players.html">Players</a></li>
+                            <li><a href="coaches.html">Coaches</a></li>
+                            <li><a href="leagues.html">Leagues</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Account</h3>
+                        <ul>
+                            <li><a href="signin.html">Sign In</a></li>
+                            <li><a href="signup.html">Sign Up</a></li>
+                            <li><a href="#">My Profile</a></li>
+                            <li><a href="#">Settings</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 FootStats. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/player-details.js"></script>
+</body>
+</html>

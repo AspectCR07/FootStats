@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players - FootStats</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html"><i class="fas fa-futbol"></i> FootStats</a></h1>
+            </div>
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="teams.html">Teams</a></li>
+                    <li><a href="players.html" class="active">Players</a></li>
+                    <li><a href="coaches.html">Coaches</a></li>
+                    <li><a href="leagues.html">Leagues</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="signin.html" class="btn btn-outline">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Players</h1>
+            <p>Explore detailed statistics for football players from around the world</p>
+        </div>
+    </section>
+
+    <section class="filters">
+        <div class="container">
+            <div class="filter-container">
+                <div class="search-box">
+                    <input type="text" id="player-search" placeholder="Search players...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <label for="league-filter">League</label>
+                        <select id="league-filter">
+                            <option value="">All Leagues</option>
+                            <option value="premier-league">Premier League</option>
+                            <option value="la-liga">La Liga</option>
+                            <option value="bundesliga">Bundesliga</option>
+                            <option value="serie-a">Serie A</option>
+                            <option value="ligue-1">Ligue 1</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="team-filter">Team</label>
+                        <select id="team-filter">
+                            <option value="">All Teams</option>
+                            <option value="manchester-city">Manchester City</option>
+                            <option value="real-madrid">Real Madrid</option>
+                            <option value="bayern-munich">Bayern Munich</option>
+                            <option value="barcelona">Barcelona</option>
+                            <option value="psg">Paris Saint-Germain</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="position-filter">Position</label>
+                        <select id="position-filter">
+                            <option value="">All Positions</option>
+                            <option value="forward">Forward</option>
+                            <option value="midfielder">Midfielder</option>
+                            <option value="defender">Defender</option>
+                            <option value="goalkeeper">Goalkeeper</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sort-by">Sort By</label>
+                        <select id="sort-by">
+                            <option value="name">Name</option>
+                            <option value="goals">Goals</option>
+                            <option value="assists">Assists</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="players-grid">
+        <div class="container">
+            <div class="grid-container">
+                <div class="player-card detailed">
+                    <div class="player-image">
+                        <img src="images/player1.jpg" alt="Lionel Messi">
+                        <div class="player-rating">93</div>
+                    </div>
+                    <div class="player-info">
+                        <h3>Lionel Messi</h3>
+                        <p class="player-position">Forward</p>
+                        <p class="player-team">Inter Miami CF</p>
+                        <div class="player-stats">
+                            <div class="stat">
+                                <span class="stat-value">35</span>
+                                <span class="stat-label">Goals</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">14</span>
+                                <span class="stat-label">Assists</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">42</span>
+                                <span class="stat-label">Matches</span>
+                            </div>
+                        </div>
+                        <a href="player-details.html?id=1" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="player-card detailed">
+                    <div class="player-image">
+                        <img src="images/player2.jpg" alt="Cristiano Ronaldo">
+                        <div class="player-rating">91</div>
+                    </div>
+                    <div class="player-info">
+                        <h3>Cristiano Ronaldo</h3>
+                        <p class="player-position">Forward</p>
+                        <p class="player-team">Al Nassr FC</p>
+                        <div class="player-stats">
+                            <div class="stat">
+                                <span class="stat-value">28</span>
+                                <span class="stat-label">Goals</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">7</span>
+                                <span class="stat-label">Assists</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">39</span>
+                                <span class="stat-label">Matches</span>
+                            </div>
+                        </div>
+                        <a href="player-details.html?id=2" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="player-card detailed">
+                    <div class="player-image">
+                        <img src="images/player3.jpg" alt="Erling Haaland">
+                        <div class="player-rating">90</div>
+                    </div>
+                    <div class="player-info">
+                        <h3>Erling Haaland</h3>
+                        <p class="player-position">Forward</p>
+                        <p class="player-team">Manchester City</p>
+                        <div class="player-stats">
+                            <div class="stat">
+                                <span class="stat-value">42</span>
+                                <span class="stat-label">Goals</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">8</span>
+                                <span class="stat-label">Assists</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">45</span>
+                                <span class="stat-label">Matches</span>
+                            </div>
+                        </div>
+                        <a href="player-details.html?id=3" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="player-card detailed">
+                    <div class="player-image">
+                        <img src="images/player4.jpg" alt="Kylian Mbappé">
+                        <div class="player-rating">89</div>
+                    </div>
+                    <div class="player-info">
+                        <h3>Kylian Mbappé</h3>
+                        <p class="player-position">Forward</p>
+                        <p class="player-team">Real Madrid</p>
+                        <div class="player-stats">
+                            <div class="stat">
+                                <span class="stat-value">31</span>
+                                <span class="stat-label">Goals</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">12</span>
+                                <span class="stat-label">Assists</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">40</span>
+                                <span class="stat-label">Matches</span>
+                            </div>
+                        </div>
+                        <a href="player-details.html?id=4" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="player-card detailed">
+                    <div class="player-image">
+                        <img src="images/player5.jpg" alt="Kevin De Bruyne">
+                        <div class="player-rating">88</div>
+                    </div>
+                    <div class="player-info">
+                        <h3>Kevin De Bruyne</h3>
+                        <p class="player-position">Midfielder</p>
+                        <p class="player-team">Manchester City</p>
+                        <div class="player-stats">
+                            <div class="stat">
+                                <span class="stat-value">12</span>
+                                <span class="stat-label">Goals</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">24</span>
+                                <span class="stat-label">Assists</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">38</span>
+                                <span class="stat-label">Matches</span>
+                            </div>
+                        </div>
+                        <a href="player-details.html?id=5" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="player-card detailed">
+                    <div class="player-image">
+                        <img src="images/player6.jpg" alt="Virgil van Dijk">
+                        <div class="player-rating">87</div>
+                    </div>
+                    <div class="player-info">
+                        <h3>Virgil van Dijk</h3>
+                        <p class="player-position">Defender</p>
+                        <p class="player-team">Liverpool</p>
+                        <div class="player-stats">
+                            <div class="stat">
+                                <span class="stat-value">5</span>
+                                <span class="stat-label">Goals</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">2</span>
+                                <span class="stat-label">Assists</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">41</span>
+                                <span class="stat-label">Matches</span>
+                            </div>
+                        </div>
+                        <a href="player-details.html?id=6" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <button class="pagination-btn prev disabled"><i class="fas fa-chevron-left"></i></button>
+                <div class="page-numbers">
+                    <button class="page-number active">1</button>
+                    <button class="page-number">2</button>
+                    <button class="page-number">3</button>
+                    <button class="page-number">4</button>
+                    <button class="page-number">5</button>
+                </div>
+                <button class="pagination-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><i class="fas fa-futbol"></i> FootStats</h2>
+                    <p>Your ultimate football statistics hub</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Explore</h3>
+                        <ul>
+                            <li><a href="teams.html">Teams</a></li>
+                            <li><a href="players.html">Players</a></li>
+                            <li><a href="coaches.html">Coaches</a></li>
+                            <li><a href="leagues.html">Leagues</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Account</h3>
+                        <ul>
+                            <li><a href="signin.html">Sign In</a></li>
+                            <li><a href="signup.html">Sign Up</a></li>
+                            <li><a href="#">My Profile</a></li>
+                            <li><a href="#">Settings</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 FootStats. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/data.js"></script>
+</body>
+</html>

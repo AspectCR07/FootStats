@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Scoring Players</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1200px;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .chart {
+            width: 48%;
+            max-width: 500px;
+            min-width: 300px;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+
+        /* Styling for the return button */
+        .return-btn {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .return-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        @media (max-width: 768px) {
+            .chart {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Top Scoring Players</h1>
+
+    <div class="chart-container">
+        <div class="chart">
+            <h2>Goals Distribution (Pie Chart)</h2>
+            <canvas id="goalsPieChart"></canvas>
+        </div>
+        <div class="chart">
+            <h2>Goals per Player (Bar Chart)</h2>
+            <canvas id="goalsBarChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Return button to go back to logout page -->
+    <button class="return-btn" onclick="window.location.href='logout.html';">Return to Logout</button>
+
+    <script>
+        // Sample data (replace with your actual data fetching logic)
+        const playerData = [
+            { name: "Cristiano Ronaldo", goals: 80 },
+            { name: "Karim Benzema", goals: 85 },
+            { name: "Paulo Dybala", goals: 45 },
+            { name: "Thomas Müller", goals: 50 },
+            { name: "Kylian Mbappé", goals: 100 },
+            { name: "Javier Hernández", goals: 60 },
+            { name: "D. Tadic", goals: 55 },
+            { name: "Henry Martín", goals: 70 },
+            { name: "Gabriel Barbosa", goals: 65 },
+            { name: "Leandro Damião", goals: 40 }
+        ];
+
+        // Prepare data for Pie Chart
+        const pieChartLabels = playerData.map(player => player.name);
+        const pieChartData = playerData.map(player => player.goals);
+
+        const pieCtx = document.getElementById('goalsPieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: pieChartLabels,
+                datasets: [{
+                    data: pieChartData,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(199, 21, 133, 0.7)',
+                        'rgba(0, 128, 0, 0.7)',
+                        'rgba(255, 140, 0, 0.7)',
+                        'rgba(0, 0, 255, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Distribution of Total Goals'
+                    }
+                }
+            }
+        });
+
+        // Prepare data for Bar Chart
+        const barChartLabels = playerData.map(player => player.name);
+        const barChartData = playerData.map(player => player.goals);
+
+        const barCtx = document.getElementById('goalsBarChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: barChartLabels,
+                datasets: [{
+                    label: 'Goals Scored',
+                    data: barChartData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Goals'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Player Name'
+                        },
+                        ticks: {
+                            autoSkip: false, // Prevent labels from overlapping
+                            maxRotation: 90 // Rotate labels for better readability
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Number of Goals Scored by Each Player'
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

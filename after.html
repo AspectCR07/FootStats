@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FootStats - Query Results</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ... (same styles as before) ... */
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-futbol"></i> FootStats</h1>
+            </div>
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="teams.html">Teams</a></li>
+                    <li><a href="players.html">Players</a></li>
+                    <li><a href="coaches.html">Coaches</a></li>
+                    <li><a href="leagues.html">Leagues</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="signin.html" class="btn btn-outline">Log Out</a>
+                </div>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="results-container">
+        <h2 class="results-title" id="query-name">Query Results</h2>
+        <div id="results-data">
+            <p class="no-results">Loading data...</p>
+        </div>
+    </section>
+
+    <footer>
+        </footer>
+
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function fetchAndRenderChart(apiUrl, chartId) {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('results-data').innerHTML = `<p class="error">${data.error}</p>`;
+                        return;
+                    }
+
+                    const ctx = document.getElementById(chartId).getContext('2d');
+                    new Chart(ctx, {
+                        type: data.chartType,
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: data.title,
+                                data: data.data,
+                                backgroundColor: data.chartType === 'pie' ? [
+                                    'rgba(255, 99, 132, 0.8)',
+                                    'rgba(54, 162, 235, 0.8)',
+                                    'rgba(255, 206, 86, 0.8)',
+                                    'rgba(75, 192, 192, 0.8)',
+                                    'rgba(153, 102, 255, 0.8)',
+                                    'rgba(255, 159, 64, 0.8)',
+                                    'rgba(199, 21, 133, 0.8)',
+                                    'rgba(0, 128, 0, 0.8)',
+                                    'rgba(255, 140, 0, 0.8)',
+                                    'rgba(0, 0, 255, 0.8)'
+                                ] : 'rgba(54, 162, 235, 0.8)',
+                                borderColor: data.chartType === 'pie' ? 'rgba(255, 255, 255, 1)' : 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    display: data.chartType === 'bar' // Only show y-axis for bar charts
+                                }
+                            },
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: data.title
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    document.getElementById('results-data').innerHTML = `<p class="error">Error fetching data: ${error}</p>`;
+                });
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('query');
+        const queryNameElement = document.getElementById('query-name');
+        const resultsContainer = document.getElementById('results-data');
+        const apiUrl = 'api.php'; //  Adjust this to the actual name of your PHP file.
+
+        if (query) {
+            queryNameElement.textContent = `Results for: ${query.replace(/%20/g, ' ')}`;
+
+            if (query === 'Top Scoring Players') {
+                resultsContainer.innerHTML = '<canvas id="topScorersChart"></canvas>';
+                fetchAndRenderChart(`${apiUrl}?query=Top%20Scoring%20Players`, 'topScorersChart');
+            } else if (query === 'Most Wins by Team') {
+                resultsContainer.innerHTML = '<canvas id="mostWinsChart"></canvas>';
+                fetchAndRenderChart(`${apiUrl}?query=Most%20Wins%20by%20Team`, 'mostWinsChart');
+            }
+            // Add more 'else if' conditions for other queries and chart types
+            // For example, if you want a pie chart for a query:
+            // else if (query === 'Some Pie Chart Data') {
+            //     resultsContainer.innerHTML = '<canvas id="pieChart"></canvas>';
+            //     fetchAndRenderChart(`${apiUrl}?query=Some%20Pie%20Chart%20Data`, 'pieChart');
+            // }
+            else {
+                resultsContainer.innerHTML = '<p class="no-results">No chart to display for this query yet.</p>';
+            }
+        } else {
+            resultsContainer.innerHTML = '<p class="no-results">No query specified.</p>';
+        }
+    </script>
+</body>
+</html>
